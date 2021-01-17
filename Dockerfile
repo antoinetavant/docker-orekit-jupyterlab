@@ -16,4 +16,13 @@ RUN conda install -y -c conda-forge orekit
 
 RUN /opt/conda/bin/conda install --yes  -c conda-forge poliastro
 
-#CMD ["./start-notebook.sh"]
+RUN conda install jupyterlab "ipywidgets>=7.5"
+# JupyterLab renderer support
+RUN jupyter labextension install jupyterlab-plotly@4.14.3
+# OPTIONAL: Jupyter widgets extension
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.3
+
+USER root
+RUN usermod -u 3305 jovyan
+USER 3305
+
